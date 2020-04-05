@@ -7,5 +7,6 @@ Getting started:
 Dependencies:
 - pandas
 - requests
+- xlrd
 - beautifulsoup4
 - matplotlib
