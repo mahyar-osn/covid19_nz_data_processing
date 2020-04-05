@@ -26,6 +26,7 @@ requires = [
     "xlrd",
     "requests",
     "numpy",
+    "matplotlib",
 ]
 source_license = readfile("LICENSE")
 
