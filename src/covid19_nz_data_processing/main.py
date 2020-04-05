@@ -35,4 +35,3 @@ if __name__ == '__main__':
     run_data.plot_cumulative_sum()
 
     plt.show()
-    print('done')
