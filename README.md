@@ -6,6 +6,5 @@ Getting started:
 - 
 Dependencies:
 - pandas
-- urllib
 - requests
 - beautifulsoup4

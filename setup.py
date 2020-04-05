@@ -23,7 +23,6 @@ requires = [
     # minimal requirements listing
     "beautifulsoup4",
     "pandas",
-    "urllib",
     "requests",
     "numpy",
 ]
