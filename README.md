@@ -8,3 +8,4 @@ Dependencies:
 - pandas
 - requests
 - beautifulsoup4
+- matplotlib
