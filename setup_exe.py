@@ -15,7 +15,7 @@ options = {
             (os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tcl86t.dll'), os.path.join('lib', 'tcl86t.dll'))
          ],
         'packages': ["pandas", "numpy", "scipy", "matplotlib", "requests", "xlrd", "bs4"],
-        'includes': 'atexit',
+        'includes': ['atexit', 'matplotlib.backends.backend_tkagg'],
     },
 }
 
@@ -32,5 +32,6 @@ setup(
     name="covid19_nz_data_processing",
     version="0.0.1",
     description="Simple script to automatically fetch, process, and plot the NZ covid-19 cases data",
+    options=options,
     executables=executables
 )
