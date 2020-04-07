@@ -1,11 +1,6 @@
-import os
-import sys
-
 from PyQt4 import QtGui
 
-from ui_plot_app import Ui_MainWindow
-
-from collector import DataCollector
+from src.covid19_nz_data_processing.app.ui_plot_app import Ui_MainWindow
 from src.covid19_nz_data_processing.main import Basic
 
 
@@ -25,10 +20,8 @@ class PlotWidget(QtGui.QMainWindow):
 
     @staticmethod
     def _plot():
-        import matplotlib.pyplot as plt
 
         run_data = Basic()
         run_data.plot_daily_trend()
         run_data.plot_cumulative_sum()
-
-        plt.show()
+        run_data.plot_cumulative_arrival_sum()

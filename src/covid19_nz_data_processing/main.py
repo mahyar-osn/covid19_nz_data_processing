@@ -1,4 +1,5 @@
-from .core.collector import DataCollector
+from src.covid19_nz_data_processing.core.collector import DataCollector
+from src.covid19_nz_data_processing.utils.visualisation import Visualisation
 
 
 class Basic:
@@ -10,6 +11,9 @@ class Basic:
         self._total_daily_confirmed = None
         self._total_daily_probable = None
         self._total_combined = None
+        self._grand_sum = None
+
+        self._vis = Visualisation()
 
         self._run()
 
@@ -18,20 +22,22 @@ class Basic:
         self._probable = self._excel_file.parse_probable()
         self._total_daily_confirmed = self._excel_file.get_daily_sum_confirmed()
         self._total_daily_probable = self._excel_file.get_daily_sum_probable()
-        self._total_combined = self._excel_file.generate_combined_sum()
+        self._total_combined = self._excel_file.get_cumulative_sum()
+        self._grand_sum = self._excel_file.get_grand_sum()
+        self._total_arrival = self._excel_file.get_cumulative_arrival_sum()
 
     def plot_daily_trend(self):
-        self._total_combined.plot()
+        self._vis.set_data(self._total_combined, tick_interval=(2.0, 5.0))
 
     def plot_cumulative_sum(self):
-        self._total_combined.cumsum().plot()
+        self._vis.set_data(self._grand_sum, tick_interval=(2.0, 100.0))
+
+    def plot_cumulative_arrival_sum(self):
+        self._vis.set_data(self._total_arrival, tick_interval=(2.0, 5.0))
 
 
 if __name__ == '__main__':
-    import matplotlib.pyplot as plt
-
     run_data = Basic()
     run_data.plot_daily_trend()
     run_data.plot_cumulative_sum()
-
-    plt.show()
+    run_data.plot_cumulative_arrival_sum()
