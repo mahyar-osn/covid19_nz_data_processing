@@ -24,4 +24,5 @@ class PlotWidget(QtGui.QMainWindow):
         run_data = Basic()
         run_data.plot_daily_trend()
         run_data.plot_cumulative_sum()
-        run_data.plot_cumulative_arrival_sum()
+        run_data.plot_daily_arrival_sum()
+        run_data.plot_overseas_date_reported()
