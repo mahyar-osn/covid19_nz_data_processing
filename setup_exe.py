@@ -1,6 +1,9 @@
+import distutils
 import sys
 from cx_Freeze import setup, Executable
 import os.path
+import opcode
+distutils_path = os.path.join(os.path.dirname(opcode.__file__), 'distutils')
 
 
 PYTHON_INSTALL_DIR = os.path.dirname(os.path.dirname(os.__file__))
@@ -10,11 +13,9 @@ os.environ['TK_LIBRARY'] = os.path.join(PYTHON_INSTALL_DIR, 'tcl', 'tk8.6')
 
 options = {
     'build_exe': {
-        'include_files': [
-            (os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tk86t.dll'), os.path.join('lib', 'tk86t.dll')),
-            (os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tcl86t.dll'), os.path.join('lib', 'tcl86t.dll'))
-         ],
-        'packages': ["pandas", "numpy", "scipy", "matplotlib", "requests", "xlrd", "bs4"],
+        'include_files': [(distutils_path, 'distutils'), 'tk86t.dll', 'tcl86t.dll'],
+        'excludes': ['distutils'],
+        'packages': ["pandas", "numpy", "scipy", "matplotlib", "requests", "xlrd", "bs4", 'pkg_resources._vendor'],
         'includes': ['atexit', 'matplotlib.backends.backend_tkagg'],
     },
 }
