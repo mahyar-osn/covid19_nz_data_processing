@@ -15,7 +15,7 @@ options = {
             (os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tcl86t.dll'), os.path.join('lib', 'tcl86t.dll'))
          ],
         'packages': ["pandas", "numpy", "scipy", "matplotlib", "requests", "xlrd", "bs4"],
-        'includes': ['atexit', 'matplotlib.backends.backend_tkagg']
+        'includes': ['atexit', 'matplotlib.backends.backend_tkagg'],
     },
 }
 
