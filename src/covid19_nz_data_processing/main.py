@@ -41,6 +41,11 @@ class Basic:
     def plot_overseas_date_reported(self, s=None):
         self._vis.set_data(self._total_overseas_reported_date, tick_interval=(2.0, 5.0), save=s)
 
+    @staticmethod
+    def export_data(data, path):
+        data.to_csv(path, sep=',')
+        return
+
 
 if __name__ == '__main__':
     op = None
