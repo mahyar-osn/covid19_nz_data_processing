@@ -12,6 +12,9 @@ class PlotWidget(QtGui.QMainWindow):
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
 
+        self._current_date = (self._ui.dateEdit.date().month(), self._ui.dateEdit.date().day())
+        self._show_value = None
+
         self._run_data = Basic()
 
         self._make_connections()
@@ -20,6 +23,40 @@ class PlotWidget(QtGui.QMainWindow):
     def _make_connections(self):
         self._ui.open.clicked.connect(self._plot)
         self._ui.export_2.clicked.connect(self._export)
+        self._ui.dateEdit.dateChanged.connect(self._get_date)
+        self._ui.daily_confirmed.clicked.connect(self._get_daily_confirmed)
+        self._ui.daily_probable.clicked.connect(self._get_daily_probable)
+        self._ui.daily_total.clicked.connect(self._get_daily_total)
+        self._ui.cum_confirmed.clicked.connect(self._get_cum_confirmed)
+        self._ui.cum_probable.clicked.connect(self._get_cum_probable)
+        self._ui.cum_total.clicked.connect(self._get_cum_total)
+
+    def _get_daily_confirmed(self):
+        self._show_value = self._run_data.get_confirmed_cases_on_date(self._current_date)
+        self._ui.lineEdit.setText(str(self._show_value))
+
+    def _get_daily_probable(self):
+        self._show_value = self._run_data.get_probable_cases_on_date(self._current_date)
+        self._ui.lineEdit.setText(str(self._show_value))
+
+    def _get_daily_total(self):
+        self._show_value = self._run_data.get_cases_on_date(self._current_date)
+        self._ui.lineEdit.setText(str(self._show_value))
+
+    def _get_cum_confirmed(self):
+        self._show_value = self._run_data.get_cumulative_confirmed_cases_on_date(self._current_date)
+        self._ui.lineEdit.setText(str(self._show_value))
+
+    def _get_cum_probable(self):
+        self._show_value = self._run_data.get_cumulative_probable_cases_on_date(self._current_date)
+        self._ui.lineEdit.setText(str(self._show_value))
+
+    def _get_cum_total(self):
+        self._show_value = self._run_data.get_cumulative_total_cases_on_date(self._current_date)
+        self._ui.lineEdit.setText(str(self._show_value))
+
+    def _get_date(self, new_date):
+        self._current_date = (new_date.month(), new_date.day())
 
     def _plot(self):
         self._run_data.plot_daily_trend()
